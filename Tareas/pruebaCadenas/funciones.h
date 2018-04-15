@@ -1,1 +1,1 @@
-
+void primerCaracterEnMatuscula(char array[]);
