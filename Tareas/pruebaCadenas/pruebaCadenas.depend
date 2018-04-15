@@ -1,0 +1,13 @@
+# depslib dependency file v1.0
+1523662789 source:c:\users\francocz\desktop\c-utn\pruebacadenas\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+
+1523750729 source:c:\users\francocz\desktop\c-utn\pruebacadenas\funciones.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+
