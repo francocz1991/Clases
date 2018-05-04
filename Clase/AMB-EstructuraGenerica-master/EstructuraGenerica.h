@@ -6,7 +6,7 @@ typedef struct
     char contrasenia[50];
     int idUsuario;
     int estado;
-    int idProducto[1000];
+    int idProducto[50];
 
 }eUsuario;
 

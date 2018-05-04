@@ -7,10 +7,13 @@
 int main()
 {
     int opcion = -1;
-    int posicionLibre;
+    int altaUsuario;
+    int altaProducto;
     int idBuscar;
     int idEncontrado;
     int auxIdProducto;
+    int i;
+    int j;
     char auxiliarNombre[50];
     char auxiliarContrasenia[50];
     eUsuario listadoGenerico[CANTIDADUSUARIOS];
@@ -26,8 +29,8 @@ int main()
         switch(opcion)
         {
             case 1:
-                posicionLibre = eUsuario_alta(listadoGenerico,CANTIDADUSUARIOS);
-                if(posicionLibre==-2)
+                altaUsuario = eUsuario_alta(listadoGenerico,CANTIDADUSUARIOS);
+                if(altaUsuario==-2)
                 {
                     printf("\nNO HAY LUGAR!");
                 }
@@ -87,7 +90,24 @@ int main()
                 }
                 else
                 {
-
+                    altaProducto=eProducto_alta(ListadoProductos,CANTIDADPRODUCTOS);
+                    if(altaProducto==-2)
+                    {
+                        printf("\nSin lugar!");
+                    }
+                    else
+                    {
+                        auxIdProducto = eProducto_asignarIdProducto(ListadoProductos,CANTIDADPRODUCTOS);
+                        for(i=0;i<50;i++)
+                        {
+                            if(listadoGenerico[idEncontrado].idProducto[i]==0)
+                            {
+                                listadoGenerico[idEncontrado].idProducto[i]==ListadoProductos[auxIdProducto].idProducto;
+                                break;
+                            }
+                        }
+                        printf("\nProducto ingresado! \n");
+                    }
                 }
                 break;
 
@@ -101,6 +121,36 @@ int main()
                 break;
 
             case 8:
+                printf("\nIngrese id del usuario: ");
+                scanf("%d",&idBuscar);
+                idEncontrado = eUsuario_buscarPorId(listadoGenerico,CANTIDADUSUARIOS,idBuscar);
+                if(idEncontrado==-2)
+                {
+                    printf("\nId no encontrado!");
+                }
+                else
+                {
+                    printf("Usuario: %s",listadoGenerico[idEncontrado].nombreDeUsuario);
+                    for(i=0;i<CANTIDADPRODUCTOS;i++)
+                    {
+                        for(j=0;j<CANTIDADPRODUCTOS;j++)
+                        {
+                            if(listadoGenerico[idEncontrado].idProducto[i]==0)
+                                {
+                                    break;
+                                }
+                            if(listadoGenerico[idEncontrado].idProducto[i]==ListadoProductos[j].idProducto)
+                            {
+
+                                printf("ID: %d\n",ListadoProductos[j].idProducto);
+                                printf("Descripcion: %s\n",ListadoProductos[j].nombre);
+                                printf("Precio: %f\n",ListadoProductos[j].precio);
+                                printf("Stock: %d\n",ListadoProductos[j].stock);
+                            }
+                        }
+
+                    }
+                }
                 break;
 
             case 9:
@@ -136,3 +186,27 @@ int main()
 
     return 0;
 }
+
+/*
+para validar cualquier dato.
+gets(auxString)
+int isAlpha(char);letra o no
+int isDigit(char);digito o no
+int isSpace(char);espacio o no
+
+x=validaStringEntero(auxString)
+if(x==1)
+{
+edad = atoi(auxString);
+}
+
+else
+{
+...
+}
+
+crear validarflotante, validar...
+
+
+
+*/

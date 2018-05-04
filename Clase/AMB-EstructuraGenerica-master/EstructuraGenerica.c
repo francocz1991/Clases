@@ -19,6 +19,7 @@ int eUsuario_init( eUsuario listado[],int limite)
         {
             listado[i].estado= LIBRE;
             listado[i].idUsuario= 0;
+            listado[i].idProducto[i]= 0;
         }
     }
     return retorno;
@@ -131,8 +132,6 @@ int eUsuario_mostrarListadoConBorrados(eUsuario listado[],int limite)
 int eUsuario_alta(eUsuario  listado[],int limite)
 {
     int retorno = -1;
-    char nombreDeUsuario[50];
-    char contrasenia[50];
     int id;
     int indice;
 
@@ -151,14 +150,13 @@ int eUsuario_alta(eUsuario  listado[],int limite)
             {
                 printf("\nIngrese nombre de usuario: ");
                 fflush(stdin);
-                gets(nombreDeUsuario);
+                gets(listado[indice].nombreDeUsuario);
                 printf("\nIngrese contrasenia: ");
                 fflush(stdin);
-                gets(contrasenia);
-                printf("\n");
-                strcpy(listado[indice].contrasenia,contrasenia);
+                gets(listado[indice].contrasenia);
                 listado[indice].idUsuario = id;
                 listado[indice].estado = OCUPADO;
+                printf("\n");
                 retorno = 0;
             }
 
@@ -227,48 +225,9 @@ int eProducto_init( eProducto listado[],int limite)
 
 int eProducto_alta(eProducto  listado[],int limite)
 {
-    int retorno = -1;int eUsuario_alta(eUsuario  listado[],int limite)
-{
-    int retorno = -1;
-    char nombreDeUsuario[50];
-    char contrasenia[50];
     int id;
     int indice;
-
-    if(limite > 0 && listado != NULL)
-    {
-        retorno = -2;
-        indice = eUsuario_buscarLugarLibre(listado,limite);
-        if(indice >= 0)
-        {
-            retorno = -3;
-            id = eUsuario_siguienteId(listado,limite);
-
-            //if(!getValidString("nombreDeUsuario?","Error","Overflow", nombreDeUsuario,50,2))
-            //{
-            if(id>0)
-            {
-                printf("\nIngrese nombre de usuario: ");
-                fflush(stdin);
-                gets(nombreDeUsuario);
-                printf("\nIngrese contrasenia: ");
-                fflush(stdin);
-                gets(contrasenia);
-                printf("\n");
-                strcpy(listado[indice].contrasenia,contrasenia);
-                listado[indice].idUsuario = id;
-                listado[indice].estado = OCUPADO;
-                retorno = 0;
-            }
-
-            //}
-        }
-    }
-    return retorno;
-}
-    char nombreDeProducto[50];
-    int id;
-    int indice;
+    int retorno;
 
     if(limite > 0 && listado != NULL)
     {
@@ -285,9 +244,9 @@ int eProducto_alta(eProducto  listado[],int limite)
             {
                 printf("\nIngrese nombre del producto: ");
                 fflush(stdin);
-                gets(nombreDeProducto);
+                gets(listado[indice].nombre);
                 printf("\nIngrese Precio: ");
-                scanf("%.2f",&listado[indice].precio);
+                scanf("%f",&listado[indice].precio);
                 printf("\nIngrese stock: ");
                 scanf("%d",&listado[indice].stock);
                 listado[indice].idProducto = id;
@@ -300,4 +259,25 @@ int eProducto_alta(eProducto  listado[],int limite)
         }
     }
     return retorno;
+}
+
+int eProducto_asignarIdProducto(eProducto  listado[],int limite)
+{
+    int i;
+    int index;
+    for(i=0;i<limite;i++)
+    {
+        if(listado[i].idProducto==0)
+        {
+            index=i;
+            break;
+        }
+    }
+
+    if(listado[index].idProducto>0)
+    {
+        index=index-1;
+    }
+
+    return index;
 }
